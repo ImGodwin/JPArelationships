@@ -1,10 +1,7 @@
 package GodwinE.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.UUID;
-import javax.persistence.Table;
 
 @Entity
 @Table(name = "participation")
@@ -13,8 +10,11 @@ public class Participation {
     @GeneratedValue
     private UUID id;
     private Person participant;
-    private Event event;
     private State currentState;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private Event event;
 
     public Participation(Person participant, Event event, State currentState) {
         this.participant = participant;
